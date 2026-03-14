@@ -1,0 +1,13 @@
+[
+  {
+    "questionId": "RAW-012",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 20,
+    "topic": "Ambiguous/OCR",
+    "rawQuestion": "L1C p0lcy ??? benef1t at m@turity maybe bonus add?",
+    "rawOptions": ["Yes maybe", "No maybe", "Depends ???", "Unreadable"],
+    "flagReason": "Unreadable OCR and ambiguous intent; cannot confidently determine a valid stem or key.",
+    "recommendedAction": "Manual re-extraction from source PDF and expert review before inclusion.",
+    "includedInFinalQuiz": false
+  }
+]

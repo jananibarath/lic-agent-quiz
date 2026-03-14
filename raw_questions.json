@@ -1,0 +1,134 @@
+[
+  {
+    "id": "RAW-001",
+    "sourcePdf": "LIC_Practice_Set_A.pdf",
+    "sourcePage": 3,
+    "topic": "Insurance Basics",
+    "question": "What is the full form of LIC in India?",
+    "options": ["Life Insurance Corporation", "Legal Insurance Council", "Life Investment Company", "Loan Insurance Corporation"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q1. What is the full form of LIC? (A) Life Insurance Corporation (B) Legal Insurance Council (C) Life Investment Company (D) Loan Insurance Corporation | Ans: A"
+  },
+  {
+    "id": "RAW-002",
+    "sourcePdf": "LIC_Practice_Set_A.pdf",
+    "sourcePage": 3,
+    "topic": "Insurance Basics",
+    "question": "In life insurance, premium is usually paid by the ____.",
+    "options": ["Nominee", "Policyholder", "Surveyor", "Reinsurer"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q2. In life insurance, premium is usually paid by the ____ (A) Nominee (B) Policyholder (C) Surveyor (D) Reinsurer | Ans: A"
+  },
+  {
+    "id": "RAW-003",
+    "sourcePdf": "LIC_Practice_Set_A.pdf",
+    "sourcePage": 4,
+    "topic": "Regulation",
+    "question": "IRDAI is primarily responsible for regulating which sector in India?",
+    "options": ["Insurance sector", "Agriculture loans", "Public distribution", "Rail transport"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q3 IRDAI regulates? (A) Insurance sector (B) Agriculture loans (C) Public distribution (D) Rail transport | Ans A"
+  },
+  {
+    "id": "RAW-004",
+    "sourcePdf": "LIC_Practice_Set_A.pdf",
+    "sourcePage": 5,
+    "topic": "Policy Servicing",
+    "question": "A grace period in insurance is the extra time allowed after premium due date without immediate lapse.",
+    "options": ["True", "False", "Only for health insurance", "Only for annuities"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q4 Grace period means extra time after due date before policy lapses. (A) True (B) False (C) Only for health insurance (D) Only for annuities | Ans A"
+  },
+  {
+    "id": "RAW-005",
+    "sourcePdf": "LIC_Practice_Set_B.pdf",
+    "sourcePage": 2,
+    "topic": "Policy Servicing",
+    "question": "Surrender value generally becomes available only after a minimum premium-paying period.",
+    "options": ["True", "False", "Never", "Only in motor insurance"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q5 Surrender value available after minimum premium paying period. A.True B.False C.Never D.Only motor | Ans A"
+  },
+  {
+    "id": "RAW-006",
+    "sourcePdf": "LIC_Practice_Set_B.pdf",
+    "sourcePage": 2,
+    "topic": "Policy Servicing",
+    "question": "SURRENDER VALUE generally becomes available only after a minimum premium paying period",
+    "options": ["true", "false", "never", "only in motor insurance"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q5) SURRENDER VALUE generally becomes available only after minimum premium-paying period (A) true (B) false (C) never (D) only in motor insurance"
+  },
+  {
+    "id": "RAW-007",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 11,
+    "topic": "Nomination",
+    "question": "N0minee can recelve p0licy m0ney after death 0f life assured?",
+    "options": ["Yess", "Noo", "Only agent", "Bank manager"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q7 N0minee can recelve p0licy m0ney after death 0f life assured? A.Yess B.Noo C.Only agent D.Bank manager Ans:A"
+  },
+  {
+    "id": "RAW-008",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 12,
+    "topic": "Documentation",
+    "question": "KYC in insurance commonly refers to:",
+    "options": ["Know Your Customer", "Keep Your Commission", "Key Yield Certificate", "Known Yearly Claim"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "inferred_from_context",
+    "rawTextBlock": "Q8 KYC in insurance refers to (A) Know Your Customer (B) Keep Your Commission (C) Key Yield Certificate (D) Known Yearly Claim"
+  },
+  {
+    "id": "RAW-009",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 14,
+    "topic": "Regulation",
+    "question": "Which body licenses insurance agents in India?",
+    "options": ["IRDAI", "SEBI", "RBI", "NABARD"],
+    "originalAnswerKey": "B",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q9 Which body licenses insurance agents in India? A.IRDAI B.SEBI C.RBI D.NABARD Ans:B"
+  },
+  {
+    "id": "RAW-010",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 18,
+    "topic": "Policy Types",
+    "question": "Term insurance provides life cover for a specified period.",
+    "options": ["True", "False", "Only for pension plans", "Only after maturity"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q10 Term insurance provides life cover for specified period. (A) True (B) False (C) Only pension (D) Only after maturity | Ans:A"
+  },
+  {
+    "id": "RAW-011",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 19,
+    "topic": "Claims",
+    "question": "Claim settlement ratio means the percentage of claims settled by an insurer against total claims received.",
+    "options": ["True", "False", "Only for ULIPs", "Only for group insurance"],
+    "originalAnswerKey": "A",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q11 Claim settlement ratio = % claims settled out of claims received. A.True B.False C.Only ULIP D.Only group | Ans A"
+  },
+  {
+    "id": "RAW-012",
+    "sourcePdf": "LIC_OCR_Scan_C.pdf",
+    "sourcePage": 20,
+    "topic": "Ambiguous/OCR",
+    "question": "L1C p0lcy ??? benef1t at m@turity maybe bonus add?",
+    "options": ["Yes maybe", "No maybe", "Depends ???", "Unreadable"],
+    "originalAnswerKey": "C",
+    "answerSourceType": "printed_key",
+    "rawTextBlock": "Q12 L1C p0lcy ??? benef1t at m@turity maybe bonus add? A.Yes maybe B.No maybe C.Depends ??? D.Unreadable"
+  }
+]
