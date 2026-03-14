@@ -49,8 +49,8 @@ Kept:
 If both raw and corrected variants exist, final quiz keeps the corrected/clean representative only.
 
 ## Dashboard features
-- Home dashboard with totals, topic count, verified vs corrected split, flagged count
-- Topic filtering (`All`, topic-wise, `Mixed Practice`)
+- Home dashboard with totals derived from `cleaned_questions.json` (live quiz pool), topic count inferred from available topic/source fields, verified vs corrected split, and flagged count from `flagged_questions.json`
+- Topic filtering (`All`, source/topic-wise, `Mixed Practice`)
 - Study Mode (immediate feedback + mnemonic tips when wrong)
 - Exam Mode (feedback deferred to result screen)
 - One-question-at-a-time flow with answer locking
@@ -73,7 +73,13 @@ Direct file-open (`file://`) may fail to load JSON because browsers often block 
 So: **Live Server is recommended for reliable behavior**.
 
 ## Where cleaned questions are stored
-Quiz-ready questions are in `cleaned_questions.json`.
+Quiz-ready questions are in `cleaned_questions.json` and are loaded directly at runtime (no hardcoded fallback question set in the live quiz path).
+
+## Count derivation notes
+- **Total cleaned questions**: `cleaned_questions.json`.length after runtime compatibility normalization.
+- **Verified/Corrected counts**: based on each cleaned question's `status` value.
+- **Flagged count**: `flagged_questions.json`.length.
+- **Topic count/filter**: uses `topic` when present; otherwise derives a stable label from `sourceTextFile`.
 
 ## Add more PDFs later
 1. Extract new raw blocks from PDF text/OCR.
