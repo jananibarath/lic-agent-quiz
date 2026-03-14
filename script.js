@@ -2,6 +2,7 @@ const STORAGE_KEY = 'licQuizState.v1';
 
 const state = {
   cleanedQuestions: [],
+  questionLookup: {},
   correctedQuestions: [],
   flaggedQuestions: [],
   correctionLogs: [],
@@ -43,10 +44,53 @@ async function loadData() {
     fetch('flagged_questions.json').then(r => r.json()),
     fetch('corrections_log.json').then(r => r.json())
   ]);
-  state.cleanedQuestions = cleaned;
+  state.cleanedQuestions = normalizeCleanedQuestions(cleaned);
+  state.questionLookup = Object.fromEntries(state.cleanedQuestions.map(q => [q.id, q]));
   state.correctedQuestions = corrected;
   state.flaggedQuestions = flagged;
   state.correctionLogs = logs;
+}
+
+function normalizeCleanedQuestions(cleaned) {
+  if (!Array.isArray(cleaned)) return [];
+  return cleaned
+    .filter(item => item && item.id && item.question && Array.isArray(item.options) && item.options.length)
+    .map(item => {
+      const answerIndex = Number.isInteger(item.answer) ? item.answer - 1 : parseAnswerValue(item.answer);
+      const safeAnswerIndex = answerIndex >= 0 && answerIndex < item.options.length ? answerIndex : 0;
+      const topic = inferTopic(item);
+      return {
+        ...item,
+        topic,
+        correctAnswerIndex: safeAnswerIndex,
+        correctAnswerText: item.options[safeAnswerIndex],
+        explanationShort: item.explanationShort || item.explanation || `Correct answer: ${item.options[safeAnswerIndex]}`,
+        mnemonicTip: item.mnemonicTip || item.memoryTip || 'Re-read this question and compare all options carefully.'
+      };
+    });
+}
+
+function parseAnswerValue(answer) {
+  if (typeof answer === 'number') return answer;
+  if (typeof answer !== 'string') return 0;
+  const trimmed = answer.trim().toUpperCase();
+  const letterMap = { A: 0, B: 1, C: 2, D: 3 };
+  if (trimmed in letterMap) return letterMap[trimmed];
+  const numeric = Number.parseInt(trimmed, 10);
+  if (!Number.isNaN(numeric)) {
+    return numeric > 0 ? numeric - 1 : numeric;
+  }
+  return 0;
+}
+
+function inferTopic(item) {
+  if (item.topic && String(item.topic).trim()) return String(item.topic).trim();
+  const fromSource = String(item.sourceTextFile || '')
+    .split('/')
+    .pop()
+    .replace('_pagewise.txt', '')
+    .trim();
+  return fromSource || 'General LIC';
 }
 
 function hydrateState() {
@@ -201,7 +245,7 @@ function continueQuiz() {
 
 function renderQuiz() {
   const id = state.queue[state.currentIndex];
-  const q = state.cleanedQuestions.find(item => item.id === id);
+  const q = state.questionLookup[id];
   if (!q) {
     renderResults();
     return;
@@ -305,7 +349,7 @@ function renderResults() {
   const pct = total ? Math.round((state.score.correct / total) * 100) : 0;
   const topicStats = {};
   state.queue.forEach(id => {
-    const q = state.cleanedQuestions.find(item => item.id === id);
+    const q = state.questionLookup[id];
     if (!q) return;
     topicStats[q.topic] ??= { total: 0, correct: 0 };
     topicStats[q.topic].total += 1;
@@ -366,7 +410,7 @@ function retryWrong() {
 
 function renderMistakes() {
   const cards = state.wrongIds
-    .map(id => state.cleanedQuestions.find(q => q.id === id))
+    .map(id => state.questionLookup[id])
     .filter(Boolean)
     .map(q => `
       <div class="list-card">
@@ -397,17 +441,19 @@ function renderMistakes() {
 function renderReviewPanel() {
   const correctedRows = state.correctionLogs.map(log => `
     <div class="list-card">
-      <strong>${log.questionId}</strong> <span class="topic-chip">${log.includedInFinalQuiz ? 'Included' : 'Excluded'}</span>
-      <p class="small">Reason: ${log.correctionReason} · Confidence: ${log.confidenceScore}</p>
-      <p class="small">Basis: ${log.correctionBasis}</p>
+      <strong>${log.id || log.questionId || 'Unknown question'}</strong>
+      <span class="topic-chip">${log.includedInFinalQuiz === false ? 'Excluded' : 'Included'}</span>
+      <p class="small">Reason: ${log.correctionReason || 'Not recorded'} · Confidence: ${log.confidenceScore ?? 'N/A'}</p>
+      <p class="small">Basis: ${log.correctionBasis || 'No basis text provided.'}</p>
     </div>
   `).join('');
 
   const flaggedRows = state.flaggedQuestions.map(item => `
     <div class="list-card">
-      <strong>${item.questionId}</strong>
-      <p class="small">Reason: ${item.flagReason}</p>
-      <p class="small">Action: ${item.recommendedAction}</p>
+      <strong>${item.id || item.questionId || 'Unknown question'}</strong>
+      <p class="small">Source: ${item.sourceTextFile || 'N/A'} ${item.sourcePageMarker ? `· ${item.sourcePageMarker}` : ''}</p>
+      <p class="small">Reason: ${Array.isArray(item.flagReasons) ? item.flagReasons.join('; ') : (item.flagReason || 'Not recorded')}</p>
+      <p class="small">Action: ${item.recommendedAction || 'Manual review required'}</p>
     </div>
   `).join('');
 
@@ -432,7 +478,7 @@ function renderReviewPanel() {
 function getWeakAreas() {
   const counts = {};
   for (const [id, selected] of Object.entries(state.answered)) {
-    const q = state.cleanedQuestions.find(x => x.id === id);
+    const q = state.questionLookup[id];
     if (!q) continue;
     counts[q.topic] ??= { wrong: 0, total: 0 };
     counts[q.topic].total += 1;
